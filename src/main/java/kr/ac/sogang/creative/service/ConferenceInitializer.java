@@ -5,10 +5,13 @@ import kr.ac.sogang.creative.repository.ConferenceRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
 import java.util.Locale;
@@ -20,8 +23,11 @@ public class ConferenceInitializer {
 
     private final ConferenceRepository conferenceRepository;
 
+    @Value("classpath:data/conferences.csv")
+    private Resource conferences;
+
     public void init() throws IOException {
-        Reader in = new FileReader("data/conferences.csv");
+        Reader in = new InputStreamReader(conferences.getInputStream());
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in);
 
         records.forEach(record -> {

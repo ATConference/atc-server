@@ -6,10 +6,13 @@ import kr.ac.sogang.creative.repository.ParticipantRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Locale;
 import java.util.Optional;
@@ -21,8 +24,11 @@ public class ParticipantInitializer {
     private final ConferenceRepository conferenceRepository;
     private final ParticipantRepository participantRepository;
 
+    @Value("classpath:data/participants.csv")
+    private Resource participants;
+
     public void init() throws IOException {
-        Reader in = new FileReader("data/participants.csv");
+        Reader in = new InputStreamReader(participants.getInputStream());
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in);
 
         records.forEach(record -> {
