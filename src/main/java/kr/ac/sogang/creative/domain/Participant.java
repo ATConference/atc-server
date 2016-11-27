@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -25,6 +26,10 @@ public class Participant extends AbstractPersistable<Long> {
 
     @ElementCollection
     private Set<Type> type = new HashSet<>();
+
+    @NotEmpty
+    @URL
+    private String thumbImage;
 
     @URL
     private String image;

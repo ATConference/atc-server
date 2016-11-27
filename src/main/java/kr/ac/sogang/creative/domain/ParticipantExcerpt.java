@@ -15,5 +15,5 @@ public interface ParticipantExcerpt {
 
     Set<Participant.Type> getType();
 
-    String getImage();
+    String getThumbImage();
 }
