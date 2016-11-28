@@ -36,7 +36,6 @@ public class Program extends AbstractPersistable<Long> {
     @ElementCollection
     private List<String> images = new ArrayList<>();
 
-    @NotEmpty
     private String videoId;
 
     @JsonIgnore
