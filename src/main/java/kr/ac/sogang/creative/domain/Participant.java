@@ -44,9 +44,15 @@ public class Participant extends AbstractPersistable<Long> {
     @ManyToMany(mappedBy = "participants")
     private Set<Program> programs = new HashSet<>();
 
+    @JsonIgnore
+    public boolean isDirector() {
+        return this.type.contains(Type.DIRECTOR);
+    }
+
     public enum Type {
         ARTIST,
         SPEAKER,
-        STAFF
+        STAFF,
+        DIRECTOR
     }
 }

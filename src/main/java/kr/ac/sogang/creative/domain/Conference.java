@@ -1,5 +1,6 @@
 package kr.ac.sogang.creative.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -41,4 +42,8 @@ public class Conference extends AbstractPersistable<Long> {
 
     @OneToMany(mappedBy = "conference")
     private List<Participant> participants;
+
+    public Participant getDirector() {
+        return participants.stream().filter(Participant::isDirector).findFirst().get();
+    }
 }
