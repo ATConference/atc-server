@@ -72,6 +72,7 @@ public class ProgramInitializer {
         program.setParticipants(Arrays.stream(participants.get().split(","))
                 .map(participantRepository::findByName)
                 .flatMap(Collection::stream)
+                .filter(x -> x.getConference().equals(program.getConference()))
                 .collect(Collectors.toSet()));
 
         programRepository.save(program);

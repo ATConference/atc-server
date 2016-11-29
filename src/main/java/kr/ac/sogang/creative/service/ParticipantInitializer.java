@@ -46,8 +46,9 @@ public class ParticipantInitializer {
     }
 
     private void saveParticipant(Optional<String> nameEn, Optional<String> nameKo, Optional<String> descriptionEn, Optional<String> descriptionKo, Optional<String> type, Optional<String> email, Optional<Integer> conferenceYear, String imageIdx) {
-        Participant participant = participantRepository.findByName(nameEn.get())
-                .stream().findFirst().orElse(new Participant());
+        Participant participant = participantRepository.findByName(nameEn.get()).stream()
+                .filter(x -> x.getConference().getYear().equals(conferenceYear.get()))
+                .findFirst().orElse(new Participant());
 
         nameEn.ifPresent(value -> participant.getName().put(Locale.ENGLISH, value));
         nameKo.ifPresent(value -> participant.getName().put(Locale.KOREAN, value));
