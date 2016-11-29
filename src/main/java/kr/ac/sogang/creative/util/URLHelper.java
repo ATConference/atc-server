@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 public class URLHelper {
 
-    static final String BASE_URL = "http://atcofficial.kr/atc-assets";
+    static final String BASE_URL = "http://assets.atcofficial.kr";
 
     public static String getURL(String type, String id, String idx, String ext) {
         return String.format("%s/%s/%s_%s.%s", BASE_URL, type, id, idx, ext);
